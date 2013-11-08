@@ -2098,8 +2098,8 @@ function show_biz_form($post = null){
       </div>-->
     </div>
 
-    <!--<div class="row">
-      <div class="large-4 columns">
+    <div class="row">
+    <!--  <div class="large-4 columns">
         <label><?=lang('createbiz.CEO')?></label>
         <input type="text" name="bz-ceo" <?=isset($post->CEO_name) ? 'value="'.$post->CEO_name.'"' : ''?> />
       </div>

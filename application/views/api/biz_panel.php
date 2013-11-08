@@ -150,7 +150,7 @@
 					bz_addr : '',
 					bz_phones : $('input[name="bz-phones"]').val(),
 					bz_ceo : '',
-					bz_email : '',
+					bz_email : $('input[name="bz-email"]').val(),
 					bz_lat : $('input[name="bz-lat"]').val(),
 					bz_lng : $('input[name="bz-lng"]').val(),
 					hms1 : $('input[name="hms1"]').val()
