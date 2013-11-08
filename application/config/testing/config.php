@@ -399,6 +399,8 @@ $config['fbpage_product_id'] = array(15, 16);
 $config['website_product_id'] = array(17, 18);
 $config['email_product_id'] = array(19, 20);
 
-$config['admin_server_icon_url'] = 'http://admin.buskko.com/assets/images/icon/';
+$config['admin_server_icon_url'] = 'http://adminbuskoo.dev/assets/images/icon/';
+
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */
