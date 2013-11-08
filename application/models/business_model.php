@@ -174,7 +174,9 @@ class Business_model extends CI_Model {
 		$phones = $phones.' '.$extra_phoones;
 		
 		$address = isset($metas['address']) ? ' '.$metas['address'] : '';
-		$CEO = isset($metas['CEO_name']) ? ' '.$metas['CEO_name'] : '';
+		//$CEO = isset($metas['CEO_name']) ? ' '.$metas['CEO_name'] : '';
+		//habilitar CEO  cuando el cliente lo pida.
+		$CEO = '';
 		$email = isset($metas['CEO_email']) ? ' '.$metas['CEO_email'] : '';
 
 		//Get the post type name
@@ -203,8 +205,8 @@ class Business_model extends CI_Model {
 			'location' => "{$metas['lat']},{$metas['lng']}",
 			'phones' => $phones,
 			'address' => $address,
-			//'ceo' => $CEO,
-			//'email' => $email,
+			'ceo' => $CEO,
+			'email' => $email,
 			'score_avg' => $post->score_avg
 		);
 		

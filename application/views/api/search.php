@@ -133,9 +133,11 @@
 				var d = $(this).attr('dist');
 				var bz_name = $(this).attr('bz-name');
 				var post_id = $(this).attr('post-id');
-				
+				var phones = $(this).attr('phones');
+				var address = $(this).attr('address');
+
 				//console.log(lat);
-				set_directions(lat, lng, d, bz_name, post_id, false);
+				set_directions(lat, lng, d, bz_name, post_id, false, phones, address);
 				$('#add-qualification-wrapper').foundation('reveal', 'close');
 			});
 			
@@ -147,9 +149,10 @@
 				var bz_name = $(this).attr('bz-name');
 				var post_id = $(this).attr('post-id');
 				var msg1 = $(this).attr('msg1');
-				
+				var phones = $(this).attr('phones');
+				var address = $(this).attr('address');
 				//console.log(lat);
-				set_directions(lat, lng, d, bz_name, post_id, true);
+				set_directions(lat, lng, d, bz_name, post_id, true, phones, address);
 				$('#add-qualification-wrapper').foundation('reveal', 'close');
 			});
 			

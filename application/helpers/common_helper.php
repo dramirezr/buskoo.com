@@ -1966,7 +1966,7 @@ function clean_search_query($text){
 function build_solr_query($terms, $post_type){
 	
 	if(!is_array($terms)){
-		$q = "(name:$terms OR tags:$terms OR phones:$terms)";
+		$q = "(name:$terms OR tags:$terms OR phones:$terms  OR email:$terms)";
 	}else{
 		if(count($terms) >= 2){ //More than a word, an expresion
 			$terms[] = '"'.implode(' ', $terms).'"';
@@ -1995,7 +1995,7 @@ function parce_terms($terms, $not_allowed_terms){
 			else
 				$f_term = $term;
 			
-			$result[] = "(name:$f_term OR tags:$f_term OR phones:$f_term)";			
+			$result[] = "(name:$f_term OR tags:$f_term OR phones:$f_term OR email:$f_term)";			
 		}
 	}
 	return $result;
@@ -2103,11 +2103,12 @@ function show_biz_form($post = null){
         <label><?=lang('createbiz.CEO')?></label>
         <input type="text" name="bz-ceo" <?=isset($post->CEO_name) ? 'value="'.$post->CEO_name.'"' : ''?> />
       </div>
+      -->
       <div class="large-4 columns">
         <label><?=lang('createbiz.email')?></label>
         <input type="email" name="bz-email" <?=isset($post->CEO_email) ? 'value="'.$post->CEO_email.'"' : ''?> />        
       </div>
-    </div>-->
+    </div>
 
     <div class="row">
       <div class="large-12 columns">

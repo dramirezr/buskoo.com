@@ -56,6 +56,7 @@ $lang['dashboard.searchform.currlocation'] = 'Tu ubicación actual.\nArrastrar y
 $lang['dashboard.searchform.accuracyerror'] = 'No hemos podido saber exactamente donde estas, cambia tu ubicación manualmente o trata con otro navegador.';
 $lang['dashboard.searchform.posttype'] = 'Tipo de Publicaci&oacute;n';
 $lang['dashboard.searchform.nearto'] = 'Estas cerca a';
+$lang['dashboard.searchform.maxdistance'] = 'Buscar en todo Buskoo';
 $lang['dashboard.searchform.locationerror'] = "No pudimos encontrar esta dirección, por favor, intente configurarlo manualmente";
 $lang['dashboard.searchform.sortby'] = "Ordenar por";
 $lang['dashboard.searchform.sortby.score'] = "Relevancia";

@@ -111,4 +111,16 @@ class Post extends CI_Model {
 		$this->db->update('post', array('visits' => $visits), array('id' => $post_id));
 	}
 	
+	function get_icon_post($post_id){
+		
+		$sql = " SELECT a.icon as icon_post, c.icon as icon_biz ";
+		$sql .= " FROM post a, post_biz_types b, biz_type c";
+		$sql .= " WHERE a.id = $post_id AND a.id = b.post_id AND b.biz_type_id = c.id";
+		
+		$icon = $this->db->query($sql)->result();
+		if(!count($icon))
+			return null;
+		return $icon;		
+	}
+
 }

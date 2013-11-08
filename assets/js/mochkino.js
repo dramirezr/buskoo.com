@@ -6,6 +6,7 @@ var leaveConfirmationFlag = true;
 
 var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
 
+
 /*if(isTouch){
 	$(window).bind('beforeunload', function() {
 		if(leaveConfirmationFlag){
@@ -142,13 +143,15 @@ function changeLocation(latLng) {
     codeLatLng();
 }
 
-function placeMarker(location) {
+/*function placeMarker(location) {
     var marker = new google.maps.Marker({
         position : location,
+        icon : base_url + 'assets/images/myLocation.png',
         map : map
     });
     map.setCenter(location);
 }
+*/
 
 function errorHandler(err) {
 		alert(location_failed);
@@ -230,12 +233,17 @@ $(document).ready(function() {
     $.cookie.expires = 1;
     
     mapInitialize(null);
-    
+    //go to user location.
+    navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
+
     $('#chlocation-go-current-location, #goto-my-current-location').click(function (e){
     	e.preventDefault();
     	Foundation.libs.dropdown.close($('#change-location-wrapper'));
     	navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
     });
+
+
+    
     //navigator.geolocation.getCurrentPosition(mapInitialize, errorHandler);
 
     /*$('#adv-search').click(function(e) {
@@ -648,6 +656,23 @@ $(document).ready(function() {
         $('input[name="search-start"]').val('0');
         search(true);
     });
+
+    $('#search2-btn').click(function(e){
+        
+        console.log('Entrooo');
+        $('#search-text').html($('input[name="search2-text"]').val());     
+        var text = $('input[name="search-text"]').val();
+
+        
+        if(!text)
+            return false;
+        
+        $('input[name="search-start"]').val('0');
+        search(true);
+    });
+
+
+
 					
     $('#close-panel-button, #open-panel-button').click(function(e){
         e.preventDefault();
@@ -930,8 +955,9 @@ function change_sort(orderby){
 
 var infoWindows = new Object();
 var markers = new Object();
+var icono_post = null;
 
-function set_directions(lat, lng, distance, bz_name, post_id, drop_only){
+function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones, address){
 
 	var destination = new google.maps.LatLng(lat, lng);
 
@@ -946,30 +972,72 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only){
 		map.setCenter(destination);
 	}
 	
-	if(!isTouch){
-		var contentString = '<div class="panel radius">' + 
-		'<h5>' + bz_name + '</h5>' +
-		'<small>' + num.toPrecision(2) + 'km</small>' +		
-		'</div>';
-		
-		infoWindows[post_id] = new google.maps.InfoWindow({
-			content: contentString
-		});		
-	}
-	
-	addMarker(post_id, destination);
-		
-	markers[post_id].setTitle(bz_name + ' (' + num.toPrecision(2) + 'km)');
-	google.maps.event.addListener(markers[post_id], 'click', function() {
-		if(!isTouch){
-			closeInfoWindows();
-			infoWindows[post_id].open(map, markers[post_id]);
-		}
-		
-		routeToHere(destination, distance);
-			
-	});
+    var extrainfo;
+    var email;
+    var website;
+    var fbpage;
+    var icono;
+    
+    $.ajax({
+            type : "GET",
+            url : lang + '/api/show_info',        
+            dataType : "json",
+            data : {
+                post_id : post_id
+            }
+        }).done(function(response){
+            if(response.state == 'ok'){
+                extrainfo    = response.extrainfo ;
+                email        = response.email ;
+                website      = response.website ;
+                fbpage       = response.fbpage ;
+                icono        = response.icono_post ;
 
+                if(response.icono_post[0].icon_biz!=null)
+                    icono_post = response.icono_post[0].icon_biz;
+                if(response.icono_post[0].icon_post!=null)
+                    icono_post = response.icono_post[0].icon_post;
+
+                console.info('icono_post :'+icono_post);   
+            }
+
+
+            addMarker(post_id, destination);
+        
+            markers[post_id].setTitle(bz_name + ' (' + num.toPrecision(2) + 'km)');
+    
+            google.maps.event.addListener(markers[post_id], 'click', function(){
+            if(!isTouch){
+                isTouch = new google.maps.InfoWindow();
+            }
+            var note = '<div class="panel radius">' + 
+                        '<h5>' + bz_name + '</h5>' +
+                        '<h6>' + extrainfo + '</h6>' +
+                        '<h6>' + address + '</h6>' +
+                        '<h6>' + phones + '</h6>' +
+                        '<h6>' + email + '</h6>' +
+                        '<h6>' + website + '</h6>' +
+                        '<h6>' + fbpage + '</h6>' +
+
+                        '<small>' + num.toPrecision(2) + 'km</small>' +   
+                        '<input type="hidden" name="search2-text" id="txtsearchtemp" value="' + bz_name + '"/>' +  
+                      
+                        '<input type="submit" id="search2-btn"  name="search2-btn" value="Ver mas" />'+
+                        '</div>';
+            isTouch.setContent(note);
+            isTouch.open(map, this);
+
+            routeToHere(destination, distance);
+        });    
+
+
+
+    });
+    
+    
+
+	
+      
 }
 
 function set_drop(lat, lng, distance, bz_name, post_id, multiple){
@@ -1044,7 +1112,9 @@ function search(openModal, orderby){
 	
 	orderby = orderby ? orderby : $('#sort').val();
 	var exactMatch = $("#exact-match").is(':checked') ? 1 : 0;
-	
+	var ckdistance = $("#ckdistance").is(':checked') ? true : false;
+    var kmts = ckdistance ? 50000 : $('#distance').val();
+    
 	$.ajax({
         type : "POST",
         url : $('#search-form').attr('action'),
@@ -1052,7 +1122,7 @@ function search(openModal, orderby){
         data : {
             text : $('input[name="search-text"]').val(),
             pid  : $('input[name="search-pid"]').val(),
-            distance : $('#distance').val(),
+            distance : kmts,
             rows : $('#rows').val(),
             start: $('input[name="search-start"]').val(),
             sort: orderby,
@@ -1096,10 +1166,19 @@ function addMarker(id, latLng){
 }
 
 function placeMarker(location) {
-    var marker = new google.maps.Marker({
-        position : location,
-        map : map
-    });
+   console.log('Ruta:'+admin_server_icon_url+icono_post);
+    if (icono_post != null){
+        var marker = new google.maps.Marker({
+            position : location,
+            icon : admin_server_icon_url+icono_post,
+            map : map
+        });
+    }else{
+        var marker = new google.maps.Marker({
+            position : location,
+            map : map
+        });  
+    }
     //map.setCenter(location);
 	
     return marker;
@@ -1199,7 +1278,7 @@ function bzCreationMapInit(map_wrapper_id, lat, lng) {
 		position : map_center,
 		map : addbz_map
 	});
-	
+	console.log('....bzCreationMapInit');
 	google.maps.event.addListener(addbz_map, 'click', function(event) {
 		if(addbz_marker)
 			addbz_marker.setMap(null);

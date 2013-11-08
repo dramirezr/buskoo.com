@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('America/Guayaquil');
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -18,7 +18,7 @@ date_default_timezone_set('America/Guayaquil');
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'production');
+	define('ENVIRONMENT', 'testing');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -39,6 +39,7 @@ if (defined('ENVIRONMENT'))
 	
 		case 'testing':
 		case 'production':
+			date_default_timezone_set('America/Guayaquil');
 			error_reporting(0);
 		break;
 

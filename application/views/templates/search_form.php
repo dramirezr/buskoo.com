@@ -2,7 +2,7 @@
 	<?= form_open('api/search', array('id' => 'search-form', 'class' => 'clear-margin')) ?>
 	<input type="hidden" name="search-start" id="search-start" value="0"/>
 	<input type="hidden" name="search-pid" id="search-pid" value=""/>
-	
+	<input type="hidden" name="search-email" id="search-email" value=""/>
 	<div class="row full-width">
 		<div class="large-12 columns">
 			<div class="panel callout opacity07 text-color-white padding-5px clear-margin">
@@ -19,7 +19,11 @@
 					</div>
 					<div class="small-5 columns">
 						<input type="text" id="search-text" name="search-text" placeholder="<?=lang('dashboard.searchform.searchtext')?>" class="radius clear-margin" />
-						<h6 class="clear-margin"><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>		
+						<h6 class="clear-margin">
+						<small class="text-color-white">
+							<?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a> &nbsp;&nbsp; <?=lang('dashboard.searchform.maxdistance')?><input type="checkbox" id="ckdistance" name="ckdistance"> 
+						</small>
+						</h6>		
 					</div>
 					<div class="small-5 columns">
 						<a href="javascript:void(0)" id="search-btn" class="button alert small radius"><?icon_magni_glass(10, 11)?></a>
@@ -54,6 +58,7 @@
 				    <option value="10">10Km</option>
 				    <option value="15" selected>15Km</option>
 				    <option value="30">30Km</option>
+				    <option value="50000">∞Km</option>
 				</select>
 			</div>
     	</div>

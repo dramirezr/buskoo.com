@@ -11,25 +11,26 @@ class Api extends CI_Controller {
 	function search(){
 		
 		//Get the search params
-		$text = $this->input->post('text', TRUE);
-		$pid = $this->input->post('pid', TRUE);
-		
-		$distance = $this->input->post('distance', TRUE);
+		$text			= $this->input->post('text', TRUE);
+		$pid 			= $this->input->post('pid', TRUE);
+		$email 			= $this->input->post('email', TRUE);
+		$distance		= $this->input->post('distance', TRUE);
+	
 		if(is_quoted($text))
 			$distance = 15;
 			
-		$start = $this->input->post('start', TRUE);
-		$start = $start ? $start : 0;
-		$rows = $this->input->post('rows', TRUE);
-		$post_type = $this->input->post('post_type', TRUE);
-		$post_type = ($post_type != 'all') ? $post_type : NULL;
-		$lat = $this->input->post('lat', TRUE);
-		$lng = $this->input->post('lng', TRUE);
-		$sort_field = $this->input->post('sort', TRUE);
-		$exact_match = $this->input->post('exact_match', TRUE);
+		$start 			= $this->input->post('start', TRUE);
+		$start 			= $start ? $start : 0;
+		$rows 			= $this->input->post('rows', TRUE);
+		$post_type 		= $this->input->post('post_type', TRUE);
+		$post_type 		= ($post_type != 'all') ? $post_type : NULL;
+		$lat 			= $this->input->post('lat', TRUE);
+		$lng 			= $this->input->post('lng', TRUE);
+		$sort_field 	= $this->input->post('sort', TRUE);
+		$exact_match	= $this->input->post('exact_match', TRUE);
 
-		$options = ci_config('solr_options');
-		$max_results = ci_config('max_solr_results');
+		$options 		= ci_config('solr_options');
+		$max_results 	= ci_config('max_solr_results');
 		
 		extract($options);
 		
@@ -50,27 +51,27 @@ class Api extends CI_Controller {
 		
 		$q = search_query($text, $post_type, $exact_match, $pid);
 		$query = array(
-			'q' => $q,
-			'fq' => '{!geofilt}',
-			'sort' => $sort, 
-			'start' => $start, 
-			'rows' => $rows,
-			'fl' => '*,score,_dist_:geodist()', 
-			'df' => 'tags',
-			'wt' => 'json', 
-			'indent' => 'true', 
-			'spatial' => 'true', 
-			'pt' => $lat.','.$lng, 
-			'sfield' => 'location', 
-			'd' => $distance, 
+			'q' 		=> $q,
+			'fq' 		=> '{!geofilt}',
+			'sort' 		=> $sort, 
+			'start' 	=> $start, 
+			'rows' 		=> $rows,
+			'fl' 		=> '*,score,_dist_:geodist()', 
+			'df' 		=> 'tags',
+			'wt' 		=> 'json', 
+			'indent' 	=> 'true', 
+			'spatial' 	=> 'true', 
+			'pt' 		=> $lat.','.$lng, 
+			'sfield' 	=> 'location', 
+			'd' 		=> $distance, 
 		);
 		
-		$url = $protocol.'://'.$hostname.':'.$port.'/'.$path.'/select?'.http_build_query($query);
-		$json = $this->curl->simple_get($url);
+		$url 		= $protocol.'://'.$hostname.':'.$port.'/'.$path.'/select?'.http_build_query($query);
+		$json 		= $this->curl->simple_get($url);
 
-		$results = json_decode($json);
+		$results 	= json_decode($json);
 		//echo '<pre>',print_r($json),'</pre>';
-		$docs = $results->response->docs;
+		$docs 		= $results->response->docs;
 		
 		if($results->response->numFound > $max_results)
 			$results->response->numFound = $max_results;
@@ -82,14 +83,14 @@ class Api extends CI_Controller {
 		}
 		
 		$params = array(
-			'text' => $text,
-			'distance' => $distance,
-		    'results' => $results,
-		    'docs' => $docs,
- 		    'start' => $start,
-		    'rows' => $rows,
-		    'numFound' => $results->response->numFound,
-		    'sort' => $sort_field
+			'text' 		=> $text,
+			'distance' 	=> $distance,
+		    'results' 	=> $results,
+		    'docs' 		=> $docs,
+ 		    'start' 	=> $start,
+		    'rows' 		=> $rows,
+		    'numFound' 	=> $results->response->numFound,
+		    'sort' 		=> $sort_field
 		);
 		
 		$this->load->helper('products/logo');
@@ -297,4 +298,26 @@ class Api extends CI_Controller {
 		die();
 	}
 	
+	function show_info(){
+		$post_id = $this->input->get('post_id');
+
+		$this->load->helper('products/logo');
+		$this->load->helper('products/extrainfo');
+		$this->load->helper('products/phones');
+		$this->load->helper('products/promo');
+		$this->load->helper('products/fbpage');
+		$this->load->helper('products/website');
+		$this->load->helper('products/email');
+		
+		$extrainfo 	= show_extrainfo($post_id);
+		$email 		= email_show($post_id);
+		$website 	= website_show($post_id);
+		$fbpage 	= fbpage_show($post_id);
+
+
+		$this->load->model('post');
+		$result_icon = $this->post->get_icon_post($post_id);
+
+		die(json_encode(array('state' => 'ok', 'extrainfo' => $extrainfo, 'email' => $email, 'website' => $website, 'fbpage' => $fbpage, 'icono_post' => $result_icon) ));
+	}
 }

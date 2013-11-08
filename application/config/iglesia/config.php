@@ -367,13 +367,13 @@ $config['proxy_ips'] = '';
 |
 */
 
-$config['app_name'] = 'Buskoo.com - Dev Site';
+$config['app_name'] = 'Buskoo.com - Iglesia';
 
 //Solr Config
 $config['solr_options'] = array (
     		'hostname' => '127.0.0.1',
     		'port' => '8080',
-    		'path' => 'solr/core0',
+    		'path' => 'solr/core2',
     		'protocol' => 'http'
 		);
 
@@ -392,7 +392,6 @@ $config['media_server_upload_url'] = 'http://media.dev/main/upload';
 $config['media_server_show_url'] = 'http://media.dev/main/show';
 $config['media_server_thumb_url'] = 'http://media.dev/main/thumbnail';
 
-
 $config['logo_product_id'] = array(7, 8);
 $config['phones_product_id'] = array(1, 2);
 $config['extrainfo_product_id'] = array(3, 4);
@@ -402,9 +401,6 @@ $config['promo_product_id'] = array(13, 14);
 $config['fbpage_product_id'] = array(15, 16);
 $config['website_product_id'] = array(17, 18);
 $config['email_product_id'] = array(19, 20);
-
-$config['admin_server_icon_url'] = 'http://adminbuskoo.dev/assets/images/icon/';
-
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

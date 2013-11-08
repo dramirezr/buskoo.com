@@ -35,6 +35,7 @@
   <script>  		
         var lang = '<?=$this->lang->lang()?>';
         var base_url = '<?=base_url()?>';
+        var admin_server_icon_url = '<?=ci_config('admin_server_icon_url')?>';
   </script>
   
   <?=$_scripts?>
@@ -68,7 +69,8 @@
 	<?= $search_form ?>
 	<!-- End Search Bar -->		
 
-	<div class="row full-width" id="main-content-wrapper">		
+	<div class="row full-width" id="main-content-wrapper">	
+		
   		<div class="large-12 columns" id="right-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
   			<?=$map?>
   		</div>	
