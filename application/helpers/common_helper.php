@@ -2097,19 +2097,20 @@ function show_biz_form($post = null){
         <input type="text" name="bz-addr" <?=isset($post->address) ? 'value="'.$post->address.'"' : ''?>/>        
       </div>-->
     </div>
-
+<!--
     <div class="row">
-    <!--  <div class="large-4 columns">
+      <div class="large-4 columns">
         <label><?=lang('createbiz.CEO')?></label>
         <input type="text" name="bz-ceo" <?=isset($post->CEO_name) ? 'value="'.$post->CEO_name.'"' : ''?> />
       </div>
-      -->
+     
       <div class="large-4 columns">
         <label><?=lang('createbiz.email')?></label>
         <input type="email" name="bz-email" <?=isset($post->CEO_email) ? 'value="'.$post->CEO_email.'"' : ''?> />        
       </div>
+       
     </div>
-
+-->
     <div class="row">
       <div class="large-12 columns">
       	<label><?=lang('createbiz.map')?> <a href="javascript:void(0)" id="<?=($post) ? 'show-map-upd' : 'show-map'?>" class="tiny button"><?=lang('createbiz.btn.showmap')?></a></label>

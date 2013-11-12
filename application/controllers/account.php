@@ -314,6 +314,12 @@ class Account extends CI_Controller {
 		$bz_address = $this->input->post('bz_addr', TRUE);
 		$bz_lat = $this->input->post('bz_lat', TRUE);
 		$bz_lng = $this->input->post('bz_lng', TRUE);
+		$CEO_email = $this->input->post('bz_email', TRUE);
+
+		$this->load->helper('products/email');
+		$extra_email =  getEmail($bz_id);
+		echo $CEO_email = $CEO_email . ' ' .$extra_email;
+		
 
 		$bz_data = array(
 			'user_id' => $user_id,
@@ -324,7 +330,7 @@ class Account extends CI_Controller {
 			'address' => $bz_address,
 			'phones' => $bz_phones,
 			'CEO_name' => $this->input->post('bz_ceo', TRUE),
-			'CEO_email' => $this->input->post('bz_email', TRUE),
+			'CEO_email' => $CEO_email,
 			'lat' => $bz_lat,
 			'lng' => $bz_lng,
 		);

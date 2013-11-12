@@ -139,6 +139,7 @@ class Business_model extends CI_Model {
 		
 		return true;
 	}
+
 	function get_top_5_biz_types(){
 		$sql = "SELECT * FROM biz_type ORDER BY hits LIMIT 5";
 		$types = $this->db->query($sql)->result();
@@ -177,8 +178,11 @@ class Business_model extends CI_Model {
 		//$CEO = isset($metas['CEO_name']) ? ' '.$metas['CEO_name'] : '';
 		//habilitar CEO  cuando el cliente lo pida.
 		$CEO = '';
-		$email = isset($metas['CEO_email']) ? ' '.$metas['CEO_email'] : '';
-
+		$email = isset($metas['CEO_email']) ? ' '.$metas['CEO_email'].',' : '';
+		$this->load->helper('products/email');
+		$extra_email =  getEmail($id);
+		$email = $email . ' ' .$extra_email;
+		
 		//Get the post type name
 		$post_type = $this->db->get_where('post_type', array('id' => $post->post_type_id))->result();
 

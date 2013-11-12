@@ -65,6 +65,8 @@ class Email extends CI_Controller {
 		$serialized = serialize($i_data);
 		
 		$this->business_model->update_bz_product($bz_product_id, array('implementation_data' => $serialized));
+		//actualizar los correos en solr.
+		$this->business_model->syncronize($post_id);
 		
  	   	die( json_encode(array('status' => 'success', 'msg' => lang('email.success'))));
 	}
