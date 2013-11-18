@@ -31,7 +31,7 @@ class Dashboard extends CI_Controller {
 		//Get the top five of business types
 		//$this->dasboard_params['bztop5types'] = $this->get_top5_bztypes();
 		
-		//Load the post
+		//Load the post diferamiiiiiiiiii
 		$pid = $this->input->get_post('pid', TRUE);
 		if($pid){
 			$post = $this->business_model->get_by_id($pid);
@@ -86,7 +86,7 @@ class Dashboard extends CI_Controller {
 		//Get the system dafault location
 		$sdl = get_config_val('default_latlang');
 		$this->dasboard_params['system_location'] = explode(',', $sdl);
-		
+
 		//Get The map zoom
 		$this->dasboard_params['map_zoom'] = get_config_val('map_zoom');
 				

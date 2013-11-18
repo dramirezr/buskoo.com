@@ -189,3 +189,21 @@ height: 100%;
 	border-radius: 1em;
 	box-shadow: 0 4px 6px -5px hsl(0, 0%, 40%), inset 0px 4px 6px -5px hsl(0, 0%, 2%) !important;
 }
+
+ .infowtitle{
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFF;
+  background-color: #900;
+}
+ .infosection1{
+  margin: 0;
+  padding: 0;
+}
+ .infosection2{
+  margin: 0;
+  padding: 0;
+  background-color: #FFDFDF;
+  border-bottom: dotted 1px #900;
+  border-top: dotted 1px #900;
+}

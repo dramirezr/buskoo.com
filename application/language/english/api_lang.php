@@ -2,6 +2,9 @@
 
 $lang['search.resultstitle'] = 'We have found %d result(s) for the search of "%s" in an area of %d km, ' .
 		'try the advanced search to get more accurate results.';
+$lang['search.resultstitleaall'] = 'We have found %d result(s) for the search of "%s", ' .
+		'try the advanced search to get more accurate results.';
+
 $lang['search.score'] = "Score";
 $lang['search.howtoget'] = "How to get?";
 $lang['search.whereis'] = "Where is?";

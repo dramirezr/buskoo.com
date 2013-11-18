@@ -21,9 +21,8 @@
 	
 </div>
 
-
-
 <script>
+		
 	var map = new Object();
 	var myLocation = new Object();
 	var myLatlng = new Object();
@@ -32,9 +31,11 @@
 	var geocoder = new google.maps.Geocoder();
 	var infowindow = new google.maps.InfoWindow();
 	var directionsDisplay;
+
+   	var sysDefaultLocation = new google.maps.LatLng('<?= $system_location[0] ?>', '<?= $system_location[1] ?>');	
 	
-	var sysDefaultLocation = new google.maps.LatLng('<?= $system_location[0] ?>', '<?= $system_location[1] ?>');
-	<? if(isset($userDefaultLocation)): ?>
+	<? 
+	if(isset($userDefaultLocation)): ?>
 	var userDefaultLocation = new google.maps.LatLng('<?= $userDefaultLocation[0] ?>', '<?= $userDefaultLocation[1] ?>');	
 	<? else: ?>
 	var userDefaultLocation = null;		
@@ -48,7 +49,8 @@
 	
 	var post = <?= isset($post) ? $post : 'null' ?>;
 	var uposts = <?= isset($uposts) ? $uposts : 'null' ?>;
-	
+
+
 </script>
 
 

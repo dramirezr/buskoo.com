@@ -4,7 +4,8 @@ jQuery.fn.reset = function () {
 
 var leaveConfirmationFlag = true;
 
-var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
+var isTouch = false;
+//var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
 
 
 /*if(isTouch){
@@ -50,11 +51,11 @@ var styles = [
 function mapInitialize(location) {
 
 	if (location) {
-		myLatlng = currLatlng = new google.maps.LatLng(
+     	myLatlng = currLatlng = new google.maps.LatLng(
 				location.coords.latitude, location.coords.longitude);
 	} else {
-		myLatlng = sysDefaultLocation;
-	}
+     	myLatlng = sysDefaultLocation;
+    }
 
 	if (userDefaultLocation) {
 		myLatlng = userDefaultLocation;
@@ -63,7 +64,7 @@ function mapInitialize(location) {
 	var cookie_latlng = cookie('latlng');
 
 	if (cookie_latlng) {
-		myLatlng = new google.maps.LatLng(cookie_latlng.lat, cookie_latlng.lng);
+     	myLatlng = new google.maps.LatLng(cookie_latlng.lat, cookie_latlng.lng);
 	}
 
 	cookie('latlng', {
@@ -234,7 +235,7 @@ $(document).ready(function() {
     
     mapInitialize(null);
     //go to user location.
-    navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
+    //navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
 
     $('#chlocation-go-current-location, #goto-my-current-location').click(function (e){
     	e.preventDefault();
@@ -242,6 +243,8 @@ $(document).ready(function() {
     	navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
     });
 
+    
+    navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
 
     
     //navigator.geolocation.getCurrentPosition(mapInitialize, errorHandler);
@@ -265,11 +268,12 @@ $(document).ready(function() {
     	var y = new google.maps.LatLng(post.lat, post.lng);
     	var kmdistance = distHaversine(myLatlng, y);
 
-    	set_drop(post.lat, post.lng, kmdistance, post.name, post.id);
+    	//set_drop(post.lat, post.lng, kmdistance, post.name, post.id);
+        set_directions(post.lat, post.lng, kmdistance, post.name, post.id, true, '', '');
     }
     
     if(uposts){
-    	//console.log(uposts);
+    	console.log(uposts);
     	
     	map.setZoom(12);
     	
@@ -277,7 +281,8 @@ $(document).ready(function() {
     		
         	var y = new google.maps.LatLng(post.lat, post.lng);
         	var kmdistance = distHaversine(myLatlng, y);
-    		set_drop(post.lat, post.lng, kmdistance, post.name, post.id, true);
+    		//set_drop(post.lat, post.lng, kmdistance, post.name, post.id, true);
+            set_directions(post.lat, post.lng, kmdistance, post.name, post.id, true, '', '');
 
     	});
     	
@@ -658,17 +663,9 @@ $(document).ready(function() {
     });
 
     $('#search2-btn').click(function(e){
-        
+        e.preventDefault();
         console.log('Entrooo');
-        $('#search-text').html($('input[name="search2-text"]').val());     
-        var text = $('input[name="search-text"]').val();
-
-        
-        if(!text)
-            return false;
-        
-        $('input[name="search-start"]').val('0');
-        search(true);
+        $('#search-btn').trigger('click');
     });
 
 
@@ -998,7 +995,7 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
                 if(response.icono_post[0].icon_post!=null)
                     icono_post = response.icono_post[0].icon_post;
 
-                console.info('icono_post :'+icono_post);   
+                //console.info('icono_post :'+icono_post);   
             }
 
 
@@ -1019,11 +1016,17 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
                         '<h6>' + website + '</h6>' +
                         '<h6>' + fbpage + '</h6>' +
 
-                        '<small>' + num.toPrecision(2) + 'km</small>' +   
+                        '<small>' + num.toPrecision(2) + ' km</small>' +   
                         '<input type="hidden" name="search2-text" id="txtsearchtemp" value="' + bz_name + '"/>' +  
-                      
-                        '<input type="submit" id="search2-btn"  name="search2-btn" value="Ver mas" />'+
                         '</div>';
+           
+              
+           
+             
+
+                       
+
+
             isTouch.setContent(note);
             isTouch.open(map, this);
 
@@ -1137,7 +1140,7 @@ function search(openModal, orderby){
         if(openModal){
             $('#search-result-wrapper').foundation('reveal', 'open');
             $('#search-result-wrapper').on('opened', function () {
-            	  $(this).foundation('section', 'reflow');
+                  $(this).foundation('section', 'reflow');
             });        	
         }else{
         	$('#search-result-wrapper').foundation('section', 'reflow');
@@ -1166,7 +1169,7 @@ function addMarker(id, latLng){
 }
 
 function placeMarker(location) {
-   console.log('Ruta:'+admin_server_icon_url+icono_post);
+   //console.log('Ruta:'+admin_server_icon_url+icono_post);
     if (icono_post != null){
         var marker = new google.maps.Marker({
             position : location,

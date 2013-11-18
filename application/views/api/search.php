@@ -1,6 +1,13 @@
 		<? header('Content-Type: text/html'); ?>  
   
-		<p><?= sprintf(lang('search.resultstitle'), $results->response->numFound, $text, $distance) ?></p>
+		<p><? 
+
+		if($distance=='50000')
+			echo sprintf(lang('search.resultstitleaall'), $results->response->numFound, $text) ;
+		else
+			echo sprintf(lang('search.resultstitle'), $results->response->numFound, $text, $distance) ;
+
+		?></p>
 		
 		<? if($results->response->numFound): ?>
 		<div class="row full-width">

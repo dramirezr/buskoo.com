@@ -104,8 +104,10 @@
 	
 	<!-- End Advanced Search From-->
 
-	<!-- Search results -->
+	<!-- Search results
 	<div class="reveal-modal expand" id="search-result-wrapper"></div>
+	 -->
+	<div class="reveal-modal" id="search-result-wrapper"></div>
 	<!-- End Search Results-->
 
 	<!-- Change location Form -->
