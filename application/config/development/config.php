@@ -389,7 +389,8 @@ $config['post_type_vs_model'] = array(
 
 //Media server
 $config['media_server_upload_url'] = 'http://media.dev/main/upload';
-$config['media_server_show_url'] = 'http://media.dev/main/show';
+//$config['media_server_show_url'] = 'http://media.dev/main/show';
+$config['media_server_show_url'] = 'http://buskko.net/main/show';
 $config['media_server_thumb_url'] = 'http://media.dev/main/thumbnail';
 
 

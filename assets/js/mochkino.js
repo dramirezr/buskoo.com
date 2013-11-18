@@ -974,6 +974,7 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
     var website;
     var fbpage;
     var icono;
+    var logo;
     
     $.ajax({
             type : "GET",
@@ -989,6 +990,11 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
                 website      = response.website ;
                 fbpage       = response.fbpage ;
                 icono        = response.icono_post ;
+                logo         = '' ;
+                if(response.logo!=''){
+                    logo = media_server_show_url+'/'+response.logo ;
+                    logo = '<img src="'+ logo +'"  width="80" height="80">';
+                }
 
                 if(response.icono_post[0].icon_biz!=null)
                     icono_post = response.icono_post[0].icon_biz;
@@ -1009,6 +1015,7 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
             }
             var note = '<div class="panel radius">' + 
                         '<h5>' + bz_name + '</h5>' +
+                        '<div>'+ logo +'</div>' +
                         '<h6>' + extrainfo + '</h6>' +
                         '<h6>' + address + '</h6>' +
                         '<h6>' + phones + '</h6>' +
@@ -1022,9 +1029,6 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
            
               
            
-             
-
-                       
 
 
             isTouch.setContent(note);

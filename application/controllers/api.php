@@ -309,15 +309,18 @@ class Api extends CI_Controller {
 		$this->load->helper('products/website');
 		$this->load->helper('products/email');
 		
+
 		$extrainfo 	= show_extrainfo($post_id);
 		$email 		= email_show($post_id);
 		$website 	= website_show($post_id);
 		$fbpage 	= fbpage_show($post_id);
-
-
+		$logo		= get_logo_url($post_id);
+		//echo '-->'.$logo.'<--';
+		//$logo = '';
 		$this->load->model('post');
 		$result_icon = $this->post->get_icon_post($post_id);
+		//die(json_encode(array('state' => 'ok', 'extrainfo' => $extrainfo, 'email' => $email, 'website' => $website, 'fbpage' => $fbpage, 'icono_post' => $result_icon ) ));
 
-		die(json_encode(array('state' => 'ok', 'extrainfo' => $extrainfo, 'email' => $email, 'website' => $website, 'fbpage' => $fbpage, 'icono_post' => $result_icon) ));
+		die(json_encode(array('state' => 'ok', 'extrainfo' => $extrainfo, 'email' => $email, 'website' => $website, 'fbpage' => $fbpage, 'icono_post' => $result_icon, 'logo' => $logo) ));
 	}
 }

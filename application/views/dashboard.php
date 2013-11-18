@@ -36,6 +36,7 @@
         var lang = '<?=$this->lang->lang()?>';
         var base_url = '<?=base_url()?>';
         var admin_server_icon_url = '<?=ci_config('admin_server_icon_url')?>';
+        var media_server_show_url = '<?=ci_config('media_server_show_url')?>';
   </script>
   
   <?=$_scripts?>

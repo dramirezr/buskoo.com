@@ -23,3 +23,22 @@ function show_logo($post_id){
 		no_logo_icon(80, 80);
 	}
 }
+
+
+function get_logo_url($post_id){
+	$CI = & get_instance();
+	$CI->load->model('media');
+	//if the product is active
+	$logo_prod_id = ci_config('logo_product_id');
+	$prod = $CI->db->get_where('bz_products', "active = 1 AND product_id IN (".implode(',', $logo_prod_id).")")->result();
+	if(!count($prod)){
+		return '';
+	}
+	
+	if($logo = $CI->media->select(array('post_id' => $post_id, 'type' => 'logo', 'state' => 1))){
+		$logo = $logo[0];
+		return $logo->hash;
+	}else{
+		return '';
+	}
+}
