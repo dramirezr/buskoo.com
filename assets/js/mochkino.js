@@ -194,9 +194,11 @@ function set_map_location(elem) {
     var lng = elem.attr('lng');
 
     changeLocation(new google.maps.LatLng(lat, lng));
+
     // myLatlng = new google.maps.LatLng(lat, lng);
     myLocation.setPosition(myLatlng);
     map.setCenter(myLatlng);
+    
 
     $(".user-locations").each(function(index) {
         $(this).text($(this).attr('name'));
@@ -211,6 +213,7 @@ function goToMyCurrentLocation(location){
 	myLatlng = currLatlng = new google.maps.LatLng(
 			location.coords.latitude, location.coords.longitude);
 	changeLocation(myLatlng);
+    
 	myLocation.setPosition(myLatlng);
 }
 
@@ -243,11 +246,38 @@ $(document).ready(function() {
     	navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
     });
 
-    
-    navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
+   
+    var center_user = true;    
 
+    if(post){
+        center_user = false;
+        var y = new google.maps.LatLng(post.lat, post.lng);
+        var kmdistance = distHaversine(myLatlng, y);
+
+        //set_drop(post.lat, post.lng, kmdistance, post.name, post.id);
+        set_directions(post.lat, post.lng, kmdistance, post.name, post.id, true, '', '');
+        
+        map.setZoom(16);
+        map.setCenter(y);
+    }
     
-    //navigator.geolocation.getCurrentPosition(mapInitialize, errorHandler);
+    if(uposts){
+        map.setZoom(12);
+        
+        $.each( uposts, function( index, post ) {
+            
+            var y = new google.maps.LatLng(post.lat, post.lng);
+            var kmdistance = distHaversine(myLatlng, y);
+            //set_drop(post.lat, post.lng, kmdistance, post.name, post.id, true);
+            set_directions(post.lat, post.lng, kmdistance, post.name, post.id, true, '', '');
+
+        });
+        
+    }
+
+    if (center_user)
+        navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
+      
 
     /*$('#adv-search').click(function(e) {
 		e.preventDefault();
@@ -263,30 +293,6 @@ $(document).ready(function() {
 		}
 	});*/
     
-    if(post){
-    	//console.log(post);
-    	var y = new google.maps.LatLng(post.lat, post.lng);
-    	var kmdistance = distHaversine(myLatlng, y);
-
-    	//set_drop(post.lat, post.lng, kmdistance, post.name, post.id);
-        set_directions(post.lat, post.lng, kmdistance, post.name, post.id, true, '', '');
-    }
-    
-    if(uposts){
-    	console.log(uposts);
-    	
-    	map.setZoom(12);
-    	
-    	$.each( uposts, function( index, post ) {
-    		
-        	var y = new google.maps.LatLng(post.lat, post.lng);
-        	var kmdistance = distHaversine(myLatlng, y);
-    		//set_drop(post.lat, post.lng, kmdistance, post.name, post.id, true);
-            set_directions(post.lat, post.lng, kmdistance, post.name, post.id, true, '', '');
-
-    	});
-    	
-    }
     
     
     $('#view-all-types').click(function(e) {
@@ -659,6 +665,7 @@ $(document).ready(function() {
             return false;
 		
         $('input[name="search-start"]').val('0');
+        $('input[name="search-pid"]').val('');
         search(true);
     });
 
@@ -941,7 +948,11 @@ $(document).ready(function() {
     	
 	});    	
 
+
+
 });
+
+
 
 function change_sort(orderby){
 	//$('#sort option').attr('selected', false);
@@ -1013,7 +1024,7 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
             if(!isTouch){
                 isTouch = new google.maps.InfoWindow();
             }
-            var note = '<div class="panel radius">' + 
+            var note =  '<div class="panel radius">' + 
                         '<h5>' + bz_name + '</h5>' +
                         '<div>'+ logo +'</div>' +
                         '<h6>' + extrainfo + '</h6>' +
@@ -1022,8 +1033,9 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
                         '<h6>' + email + '</h6>' +
                         '<h6>' + website + '</h6>' +
                         '<h6>' + fbpage + '</h6>' +
-
+            
                         '<small>' + num.toPrecision(2) + ' km</small>' +   
+                        '<a href="www.google.com" id="search2-btn" class="button alert small radius">Ver mas</a>' +
                         '<input type="hidden" name="search2-text" id="txtsearchtemp" value="' + bz_name + '"/>' +  
                         '</div>';
            
@@ -1032,9 +1044,19 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
 
 
             isTouch.setContent(note);
-            isTouch.open(map, this);
-
-            routeToHere(destination, distance);
+            //isTouch.open(map, this);
+           
+           
+            //siempre buscar en toda la base de datos y dejarlo igual
+            var ckdistance = $("#ckdistance").is(':checked') ? true : false;
+            document.getElementById('ckdistance').checked=true;
+            $('input[name="search-pid"]').val(post_id);
+            search(true);
+            $('input[name="search-pid"]').val('');
+            //$('#search-btn').trigger('click');
+            document.getElementById('ckdistance').checked=ckdistance;
+            //dfr
+            // routeToHere(destination, distance);
         });    
 
 
@@ -1066,8 +1088,8 @@ function set_drop(lat, lng, distance, bz_name, post_id, multiple){
 	
 	if(!multiple){
 		map.setZoom(16);
-		map.setCenter(destination);		
-	}
+		map.setCenter(destination);	
+    }
 	
 	addMarker(post_id, destination);
 	markers[post_id].setTitle(bz_name + ' (' + num.toPrecision(2) + 'km)');
@@ -1114,7 +1136,7 @@ function routeToHere(destination, distance){
 
 function search(openModal, orderby){
 	
-	removeMarkers();
+	//removeMarkers();
 	directionsDisplay.set('directions', null);
 	
 	orderby = orderby ? orderby : $('#sort').val();
