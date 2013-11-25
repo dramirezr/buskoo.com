@@ -1,5 +1,7 @@
-		<? header('Content-Type: text/html'); ?>  
-  
+		<? header('Content-Type: text/html'); 
+
+		if($results->response->numFound > 1): ?>
+		
 		<p><? 
 
 		if($distance=='50000')
@@ -9,7 +11,6 @@
 
 		?></p>
 		
-		<? if($results->response->numFound): ?>
 		<div class="row full-width">
 			<div class="large-5 columns">
 			<dl class="sub-nav" id="sort-wrapper">
