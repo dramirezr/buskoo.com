@@ -1,6 +1,6 @@
 		<? header('Content-Type: text/html'); 
 
-		if($results->response->numFound > 1): ?>
+		if($results->response->numFound != 1): ?>
 		
 		<p><? 
 
