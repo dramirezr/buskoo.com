@@ -980,6 +980,7 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
 		map.setCenter(destination);
 	}
 	
+
     var extrainfo;
     var email;
     var website;
@@ -1039,13 +1040,9 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
                         '<input type="hidden" name="search2-text" id="txtsearchtemp" value="' + bz_name + '"/>' +  
                         '</div>';
            
-              
-           
-
-
+        
             isTouch.setContent(note);
             //isTouch.open(map, this);
-           
            
             //siempre buscar en toda la base de datos y dejarlo igual
             var ckdistance = $("#ckdistance").is(':checked') ? true : false;
@@ -1057,14 +1054,17 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
             document.getElementById('ckdistance').checked=ckdistance;
             //dfr
             // routeToHere(destination, distance);
-        });    
+        }); 
 
+
+        google.maps.event.addListener(markers[post_id], 'dblclick', function(){  
+            markers[post_id].setMap(null);
+            markers[post_id] = null;
+        }); 
 
 
     });
     
-    
-
 	
       
 }
