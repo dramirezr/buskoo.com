@@ -56,8 +56,9 @@
 				    <option value="3">3Km</option>
 				    <option value="5">5Km</option>
 				    <option value="10">10Km</option>
-				    <option value="15" selected>15Km</option>
+				    <option value="15">15Km</option>
 				    <option value="30">30Km</option>
+				    <option value="45" selected>45Km</option>
 				    <option value="50000">∞Km</option>
 				</select>
 			</div>
