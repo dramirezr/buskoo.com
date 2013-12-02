@@ -1198,7 +1198,7 @@ function addMarker(id, latLng){
 
 function placeMarker(location) {
    //console.log('Ruta:'+admin_server_icon_url+icono_post);
-    if (icono_post != null){
+    if ((icono_post != null)&&(icono_post != '')){
         var marker = new google.maps.Marker({
             position : location,
             icon : admin_server_icon_url+icono_post,
