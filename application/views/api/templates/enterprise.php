@@ -41,7 +41,7 @@
 	
 ?>
 
-			<h4 class="subheader clear-margin"><?= $index.'. '.ucwords($d->name) ?></h4>
+			<h4 class="subheader clear-margin"><?= $index.'. '.strtoupper($d->name) ?></h4>
 			<h6 class="clear-margin font-weight-normal line-height-08"><small><?= $str_types ?></small></h6>
 			<h5 class="clear-margin font-weight-normal line-height-08 margin-bottom-5px"><small><?= lang('search.distance') ?>: <?= $distance ?>, <?= lang('search.score') ?>: <?= $score_avg ?>, ID: <?= $d->id ?>, <?= lang('search.lastupdate').': '.$post->last_update ?>, <?= lang('search.visits').': '.$post->visits ?></small></h5>
 
@@ -69,8 +69,8 @@
 										<h6 class="clear-margin font-weight-normal"><?= ucfirst($d->address) ?></h6>
 										<h6 class="clear-margin font-weight-normal"><?= lang('search.phone') ?>: <?= $d->phones ?></h6>
 										<h6 class="clear-margin font-weight-normal"><?= email_show($d->id) ?></h6>								
-										<?= website_show($d->id) ?>								
-										<?= fbpage_show($d->id) ?>								
+										<h6 class="clear-margin font-weight-normal"><?= website_show($d->id) ?>	</h6>							
+										<h6 class="clear-margin font-weight-normal"><?= fbpage_show($d->id) ?></h6>								
 									</div>
 								</div>
 							</div>

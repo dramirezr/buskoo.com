@@ -16,9 +16,9 @@ function fbpage_show($post_id){
 	foreach($prod as $p){
 		$i_data = unserialize($p->implementation_data);
 		if(isset($i_data['fbpage']) && $i_data['fbpage'])
-			$pages[] = '<h6 class="clear-margin font-weight-normal"><small>' .
+			$pages[] = '<h6 class="clear-margin font-weight-normal">' .
 					'<a href="'.$i_data['fbpage'].'" target="_blank">'.lang('fbpage.linkmsg').'</a>' .
-					'</small></h6>';
+					'</h6>';
 	}
 	
 	return implode("\n", $pages);	

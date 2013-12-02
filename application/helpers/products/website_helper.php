@@ -16,9 +16,9 @@ function website_show($post_id){
 	foreach($prod as $p){
 		$i_data = unserialize($p->implementation_data);
 		if(isset($i_data['website']) && $i_data['website'])
-			$pages[] = '<h6 class="clear-margin font-weight-normal"><small>' .
+			$pages[] = '<h6 class="clear-margin font-weight-normal">' .
 					'<a href="'.$i_data['website'].'" target="_blank">'.lang('website.linkmsg').'</a>' .
-					'</small></h6>';
+					'</h6>';
 	}
 	
 	return implode("\n", $pages);	

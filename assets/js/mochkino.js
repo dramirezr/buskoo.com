@@ -973,7 +973,8 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
 		routeToHere(destination, distance);
 	}
 	
-	num = new Number(distance);
+	num = new Number(distance) ;
+
 
 	if(drop_only){
 		map.setZoom(16);
@@ -1019,7 +1020,7 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
 
             addMarker(post_id, destination);
         
-            markers[post_id].setTitle(bz_name + ' (' + num.toPrecision(2) + 'km)');
+            markers[post_id].setTitle(bz_name.toUpperCase() + ' (' + num.toFixed(2) + ' km)');
     
             google.maps.event.addListener(markers[post_id], 'click', function(){
             if(!isTouch){
