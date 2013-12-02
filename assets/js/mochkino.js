@@ -1207,6 +1207,7 @@ function placeMarker(location) {
     }else{
         var marker = new google.maps.Marker({
             position : location,
+            icon : admin_server_icon_url+'default.png',
             map : map
         });  
     }
