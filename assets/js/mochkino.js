@@ -997,6 +997,7 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
                 post_id : post_id
             }
         }).done(function(response){
+            icono_post = '';
             if(response.state == 'ok'){
                 extrainfo    = response.extrainfo ;
                 email        = response.email ;
