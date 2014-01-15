@@ -7,7 +7,12 @@
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 <url>
-  <loc>http://www.buskoo.com/</loc>
+  <loc>http://www.buskoo.com/es/</loc>
+  <changefreq>daily</changefreq>
+</url>
+
+<url>
+  <loc>http://www.buskoo.com/client/</loc>
   <changefreq>daily</changefreq>
 </url>
 
