@@ -8,7 +8,7 @@
   <meta name="robots" content="index, follow" /> 
   <meta name="keywords" content="GeoCommerce,busqueda,búsquedas,ubicación geográfica,encontrar,locales comerciales, restaurantes,sitios de interés, agencias bancarias, cajeros, negocios,portal,geolocalizacion,mapas, ecuador, quito" /> 
   <meta name="author" content="GeoCommerce" /> 
-  <meta name="description" content="buskoo.com es un portal orientado a búsquedas por relevancia y ubicación geográfica  basado en un poderoso motorque permite tener resultados en un mejor tiempo. buskoo.com te permite encontrar negocios, locales comerciales, restaurantes, sitios de interés, agencias bancarias, cajeros y demás sin tener que entrar o descargar otras aplicaciones para llegar al sitio de búsqueda." /> 
+  <meta name="description" content="buskoo.com es un portal orientado a búsquedas por relevancia y ubicación geográfica  basado en un poderoso motor que permite tener resultados en un mejor tiempo. buskoo.com te permite encontrar negocios, locales comerciales, restaurantes, sitios de interés, agencias bancarias, cajeros y demás sin tener que entrar o descargar otras aplicaciones para llegar al sitio de búsqueda." /> 
 
   <title><?= $this->config->item('app_name') ?></title>
   
