@@ -241,11 +241,9 @@
   </script>
 
   <br>
-<hr>
   	<div>
 		<span id="share-banner"></span>
 	</div>
-<hr>
 
 </body>
 </html>
