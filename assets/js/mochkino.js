@@ -948,7 +948,21 @@ $(document).ready(function() {
     	
 	});    	
 
-
+    //publicidad
+    $.ajax({
+            type : "GET",
+            url : lang + '/api/show_banner',          
+            dataType : "json",
+            data : {
+                cachehora : (new Date()).getTime()
+            }
+        }).done(function(response){
+            console.log(response.state);
+            if(response.state == 'ok'){
+                $('#share-banner').html(response.html);
+            }
+    });
+    //fin publicidad
 
 });
 

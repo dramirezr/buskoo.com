@@ -405,6 +405,8 @@ $config['website_product_id'] = array(17, 18);
 $config['email_product_id'] = array(19, 20);
 
 $config['admin_server_icon_url'] = 'http://adminbuskoo.dev/assets/images/icon/';
+$config['banner_server_show_url'] = 'http://adminbuskoo.dev/assets/images/banner/';
+
 
 
 /* End of file config.php */

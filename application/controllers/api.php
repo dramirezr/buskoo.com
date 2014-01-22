@@ -323,4 +323,30 @@ class Api extends CI_Controller {
 
 		die(json_encode(array('state' => 'ok', 'extrainfo' => $extrainfo, 'email' => $email, 'website' => $website, 'fbpage' => $fbpage, 'icono_post' => $result_icon, 'logo' => $logo) ));
 	}
+
+	
+	function show_banner(){
+		
+		$this->load->model('banner');
+		$result = $this->banner->get_RamdomBanner();
+		$html = '<table>';
+		$html .= '<tr>';
+		$state = 'false';
+		foreach($result as $r){
+			$html .= '<td>';
+			$html .= 	'<nav><a href="'.$r->url.'"  TARGET="_blank" >'.$r->description.'</a> </nav>'.
+            		' <aside>' .
+               		'		<div id="logotipo"><img src="'.ci_config('banner_server_show_url').$r->image.'"  width="80" height="80"></div>' .
+            		'	</aside>' .
+            		'	<section id="centro">' .
+                	'		'.$r->content.' ' .
+                	'	</section>';
+            $html .= '</td>';
+            $state = 'ok';
+		}
+		$html .= '</tr>';
+		$html .= '</table>';
+		die(json_encode(array('state' => $state, 'html' => $html) ));
+	}
+
 }

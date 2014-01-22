@@ -42,6 +42,7 @@
         var base_url = '<?=base_url()?>';
         var admin_server_icon_url = '<?=ci_config('admin_server_icon_url')?>';
         var media_server_show_url = '<?=ci_config('media_server_show_url')?>';
+        var banner_server_show_url = '<?=ci_config('banner_server_show_url')?>';
   </script>
   
   <?=$_scripts?>
@@ -185,6 +186,8 @@
 		<div class="row full-width" id="waiting">
 			<div class="small-1 small-centered columns"><?= img('assets/images/loading.gif'); ?></div>
 		</div>
+
+
 		
 		<script>
 			var lang = '<?=$this->lang->lang()?>';
@@ -236,5 +239,13 @@
   	Galleria.loadTheme("<?=base_url()?>assets/galleria/themes/classic/galleria.classic.min.js");
   });
   </script>
+
+  <br>
+<hr>
+  	<div>
+		<span id="share-banner"></span>
+	</div>
+<hr>
+
 </body>
 </html>

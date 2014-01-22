@@ -107,6 +107,7 @@ class Dashboard extends CI_Controller {
 		$this->render();
 	}
 	
+
 	private function render(){
 		
 		$this->template->write('title', $this->title);
