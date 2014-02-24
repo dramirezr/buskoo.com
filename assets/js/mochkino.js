@@ -957,7 +957,7 @@ $(document).ready(function() {
                 cachehora : (new Date()).getTime()
             }
         }).done(function(response){
-            console.log(response.state);
+            //console.log(response.state);
             if(response.state == 'ok'){
                 $('#share-banner').html(response.html);
             }
