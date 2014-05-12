@@ -257,7 +257,7 @@ $(document).ready(function() {
         //set_drop(post.lat, post.lng, kmdistance, post.name, post.id);
         set_directions(post.lat, post.lng, kmdistance, post.name, post.id, true, '', '');
         
-        map.setZoom(16);
+        map.setZoom(14);
         map.setCenter(y);
     }
     
@@ -991,7 +991,11 @@ function set_directions(lat, lng, distance, bz_name, post_id, drop_only, phones,
 
 
 	if(drop_only){
-		map.setZoom(16);
+		map.setZoom(14);
+        
+        if(uposts)
+            map.setZoom(12);
+   
 		map.setCenter(destination);
 	}
 	
@@ -1103,7 +1107,10 @@ function set_drop(lat, lng, distance, bz_name, post_id, multiple){
 	}*/
 	
 	if(!multiple){
-		map.setZoom(16);
+		map.setZoom(14);
+        if(uposts)
+            map.setZoom(12);
+   
 		map.setCenter(destination);	
     }
 	
@@ -1270,7 +1277,7 @@ function codeLatLng() {
     }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             if (results[1]) {
-                //map.setZoom(11);
+                //map.setZoom(14);
                 //infowindow.setContent(results[1].formatted_address);
                 //infowindow.open(map, myLocation);
                 $('#current-address').html(results[1].formatted_address);

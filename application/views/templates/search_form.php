@@ -21,7 +21,7 @@
 						<input type="text" id="search-text" name="search-text" placeholder="<?=lang('dashboard.searchform.searchtext')?>" class="radius clear-margin" />
 						<h6 class="clear-margin">
 						<small class="text-color-white">
-							<?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a> &nbsp;&nbsp; <?=lang('dashboard.searchform.maxdistance')?><input type="checkbox" id="ckdistance" name="ckdistance"> 
+							<?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a> <!-- &nbsp;&nbsp; <?=lang('dashboard.searchform.maxdistance')?> --><input type="hidden" id="ckdistance" name="ckdistance"> 
 						</small>
 						</h6>		
 					</div>
