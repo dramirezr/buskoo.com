@@ -1,0 +1,44 @@
+body {  background-color: #FFFFFF; } 
+
+div.layout
+{
+  text-align: center;
+}
+div.centre
+{
+  text-align: center;
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+div.titulo{
+  font-weight: bold;
+  font-size:22px;
+  font-family: Arial, serif;
+  text-align: center;
+  color: black;  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+div.texto{
+  font-size:15px;
+  text-align: center;
+  font-family: Arial, serif;
+  color: white;  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.footer{
+  font-size:10px;
+  text-align: center;
+  font-family: Arial, serif;
+  color: black;  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
